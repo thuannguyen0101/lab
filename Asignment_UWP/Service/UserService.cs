@@ -24,7 +24,7 @@ namespace Asignment_UWP.Service
                 Console.WriteLine(accountJson);
                 var httpContent = new StringContent(accountJson, Encoding.UTF8, "application/json");
                 var requestConnection = await httpClient.PostAsync($"{apiBaseUrl}/v1/accounts/authentication", httpContent);
-                Console.WriteLine(requestConnection.StatusCode);                                                                                     // chờ phản hồi, lấy kết quả
+                Console.WriteLine(requestConnection.StatusCode);                                                                                    
                 if (requestConnection.StatusCode == System.Net.HttpStatusCode.OK)
                 {
                     var content = await requestConnection.Content.ReadAsStringAsync();

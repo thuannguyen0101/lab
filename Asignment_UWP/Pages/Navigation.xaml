@@ -15,7 +15,7 @@
                 <NavigationViewItem Content="Lates Song" Icon="Audio" Tag="latesSong" />
                 <NavigationViewItem Content="My Song" Icon="Audio" Tag="mySong" />
                 <NavigationViewItem Content="Add Song" Icon="Add" Tag="createSong" />
-                <NavigationViewItem Content="Logout" Icon="Back" Tag="logout" />
+                <NavigationViewItem Content="Add My Song" Icon="Add" Tag="createMySong" />
             </NavigationView.MenuItems>
             <NavigationView.AutoSuggestBox>
                 <AutoSuggestBox x:Name="NavViewSearchBox" QueryIcon="Find" />

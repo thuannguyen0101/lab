@@ -26,10 +26,12 @@
             <PasswordBox x:Name="password" HorizontalAlignment="Left" Margin="149,219,0,0" VerticalAlignment="Top" Width="348"/>
             <TextBox x:Name="address" HorizontalAlignment="Left" Margin="149,281,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="348"/>
             <TextBlock HorizontalAlignment="Left" Margin="153,256,0,0" Text="Address" TextWrapping="Wrap" VerticalAlignment="Top"/>
-            <TextBox x:Name="avatar" HorizontalAlignment="Left" Margin="149,406,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="348"/>
+            <TextBox x:Name="avatar"  Margin="153,393,278,426" Text="" Width="280"/>
+            <Button x:Name="createThumbnail"  Content="Add image" Margin="385,394,0,0" Click="Button_CreateThumbnail" VerticalAlignment="Top"/>
+            <Button x:Name="deleteThumbnail"  Content="Remove image" Margin="385,394,0,0" Click="Button_DeleteThumbnail" Visibility="Collapsed" VerticalAlignment="Top"/>
             <TextBox x:Name="phone" HorizontalAlignment="Left" Margin="149,342,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.502,0.569" Width="348"/>
             <TextBlock HorizontalAlignment="Left" Margin="150,318,0,0" Text="Phone" TextWrapping="Wrap" VerticalAlignment="Top" Width="72"/>
-            <TextBlock HorizontalAlignment="Left" Margin="153,382,0,0" Text="Avatar" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" RenderTransformOrigin="0.392,-2.763"/>
+            <TextBlock HorizontalAlignment="Left" Margin="151,374,0,0" Text="Avatar" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" RenderTransformOrigin="0.392,-2.763"/>
             <RadioButton Content="Male" Margin="173,440,0,0" VerticalAlignment="Top" GroupName="gender" Width="87" Checked="HandleCheck"/>
             <RadioButton Content="Fermale" Margin="254,440,0,0" VerticalAlignment="Top" GroupName="gender" Checked="HandleCheck"/>
             <RadioButton Content="Other" Margin="345,440,0,0" VerticalAlignment="Top" GroupName="gender" Checked="HandleCheck" RenderTransformOrigin="0.883,0.734"/>

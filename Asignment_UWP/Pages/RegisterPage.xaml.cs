@@ -1,31 +1,54 @@
 ﻿using Asignment_UWP.Entity;
 using Asignment_UWP.Service;
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 namespace Asignment_UWP.Pages
 {
-    public sealed partial class RegisterPage : Page
+    public sealed partial class RegisterPage : Windows.UI.Xaml.Controls.Page
     {
         private int checkGender;
         private string dateChanged;
         private int check = 0;
+        private static string publicIDCloudinary;
+        private CloudinaryDotNet.Account accountCloudinary;
+        private Cloudinary cloudinary;
+
         public RegisterPage()
         {
+            this.Loaded += RegisterPage_Loaded;
             this.InitializeComponent();
         }
+
+        private void RegisterPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            accountCloudinary = new CloudinaryDotNet.Account(
+            "dn3bmj5ex",
+            "344297185835677",
+            "SanBwHJT4cGsaTibpYRpt0GzzmE"
+            );
+            cloudinary = new Cloudinary(accountCloudinary);
+            cloudinary.Api.Secure = true;
+        }
+
         private void HandleCheck(object sender, RoutedEventArgs e)
         {
             var check = sender as RadioButton;
@@ -123,6 +146,45 @@ namespace Asignment_UWP.Pages
             this.Frame.Navigate(typeof(Pages.LoginPage));
         }
 
-   
+        private async void Button_CreateThumbnail(object sender, RoutedEventArgs e)
+        {
+            var picker = new Windows.Storage.Pickers.FileOpenPicker();
+            picker.ViewMode = Windows.Storage.Pickers.PickerViewMode.List;
+            picker.SuggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.PicturesLibrary;
+            picker.FileTypeFilter.Add(".jpg");
+            picker.FileTypeFilter.Add(".jpeg");
+            picker.FileTypeFilter.Add(".png");
+
+            StorageFile file = await picker.PickSingleFileAsync();
+            if (file != null)
+            {
+                BitmapImage bitmapImage = new BitmapImage();
+                IRandomAccessStream fileStream = await file.OpenReadAsync();
+                await bitmapImage.SetSourceAsync(fileStream);
+                RawUploadParams imageUploadParams = new RawUploadParams()
+                {
+                    File = new FileDescription(file.Name, await file.OpenStreamForReadAsync())
+                };
+                RawUploadResult result = await cloudinary.UploadAsync(imageUploadParams);
+                publicIDCloudinary = result.PublicId;
+                avatar.Text = result.Url.ToString();
+                createThumbnail.Visibility = Visibility.Collapsed;
+                deleteThumbnail.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                Debug.WriteLine("Create image by avatar failed!");
+            }
+        }
+        private async void Button_DeleteThumbnail(object sender, RoutedEventArgs e)
+        {
+            List<string> listPublicIdCouldinary = new List<string>();
+            listPublicIdCouldinary.Add(publicIDCloudinary);
+            string[] arrayPublicIdCouldinary = listPublicIdCouldinary.ToArray();
+            await cloudinary.DeleteResourcesAsync(arrayPublicIdCouldinary);
+            deleteThumbnail.Visibility = Visibility.Collapsed;
+            createThumbnail.Visibility = Visibility.Visible;
+            avatar.Text = "";
+        }
     }
 }

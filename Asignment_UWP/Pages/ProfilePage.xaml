@@ -9,6 +9,16 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Ellipse x:Name="Ellipse" 
+                                         VerticalAlignment="Top"
+                                         HorizontalAlignment="Left" Height="140" RenderTransformOrigin="0.5,0.5" Width="167" Margin="217,102,0,0" UseLayoutRounding="False" d:LayoutRounding="Auto">
+            <Ellipse.RenderTransform>
+                <CompositeTransform ScaleX="-1" ScaleY="-1" Rotation="179.3"/>
+            </Ellipse.RenderTransform>
+            <Ellipse.Fill>
+                <ImageBrush x:Name="avatar" ImageSource="https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg"/>
+            </Ellipse.Fill>
+        </Ellipse>
         <TextBlock x:Name="fullName" HorizontalAlignment="Left" Margin="516,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="27" Width="475"><Run Text="Name"/><LineBreak/><Run/></TextBlock>
         <TextBlock x:Name="email" HorizontalAlignment="Left" Margin="516,143,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="27" Width="475" Text="Email"/>
         <TextBlock x:Name="address" HorizontalAlignment="Left" Margin="516,187,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="27" Width="475" Text="Address"/>
